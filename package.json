@@ -32,6 +32,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13",
+    "@types/morgan": "^1.9.4",
     "nodemon": "^2.0.22",
     "typescript": "^5.0.2"
   }

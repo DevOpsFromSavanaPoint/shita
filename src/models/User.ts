@@ -11,14 +11,14 @@ const userSchema = new Schema({
             required: true
         }
     },
-    email: { 
-        type: String, 
-        required: true, 
-        unique: true 
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
-    password: { 
-        type: String, 
-        required: true 
+    password: {
+        type: String,
+        required: true
     },
     address: {
         street: { type: String },
@@ -29,18 +29,27 @@ const userSchema = new Schema({
         country: { type: String },
         zipCode: { type: String }
     },
-    
-    phoneNumber: { type: String },
+
+    phoneNumber: {
+        type: String,
+        unique: true
+    },
 
     phoneVerified: {
         type: Boolean,
         default: false
-      },
+    },
 
-      emailVerified: {
+    emailVerified: {
         type: Boolean,
         default: false
-      }
-}, { timestamps: true});
+    }
+}, { timestamps: true });
 
-export const User = model('User', userSchema);
+
+
+const User = model('User', userSchema);
+
+export { User, userSchema }
+
+

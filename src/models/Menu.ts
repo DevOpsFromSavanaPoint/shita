@@ -11,6 +11,10 @@ const menuSchema = new Schema({
     ref: 'Restaurant',
     required: true
   },
+  price: {
+    type: Number,
+    required: true
+  },
   products: [
     {
       type: Schema.Types.ObjectId,

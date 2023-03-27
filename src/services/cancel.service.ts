@@ -15,24 +15,24 @@ export const cancelOrder = async(req: Request, res: Response) => {
       }
   
       // Verifica se o pedido já foi entregue
-      if (order.delivered) {
+      if (order.status === 'completed') {
         return res.status(400).json({ message: "Pedido já foi entregue" });
       }
   
       // Verifica se o pedido já foi cancelado anteriormente
-      if (order.status === "Cancelado") {
+      if (order.status === "cancelled") {
         return res.status(400).json({ message: "Pedido já foi cancelado" });
       }
   
       // Verifica se o pedido já está em processo de cancelamento
-      if (order.status === "Cancelando") {
+      if (order.status === "processing") {
         return res
           .status(400)
           .json({ message: "Pedido já está sendo cancelado" });
       }
   
       // Define o status do pedido como "Cancelando"
-      order.status = "Cancelando";
+      order.status = "cancelled";
       await order.save();
   
       // Executa a lógica de cancelamento em uma fila de tarefas
@@ -47,7 +47,7 @@ export const cancelOrder = async(req: Request, res: Response) => {
   
   // Simula a execução da lógica de cancelamento em uma fila de tarefas
   function cancelOrderTask(order) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       setTimeout(() => {
         // Verifica se o pedido já foi entregue enquanto estava sendo cancelado
         if (order.delivered) {

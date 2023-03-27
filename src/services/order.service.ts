@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Order } from '../models/Order';
 
-const OrderService = {
+export const OrderService = {
   getUserOrders: async (req: Request, res: Response) => {
     try {
       const orders = await Order.find({ user: req.user._id });
